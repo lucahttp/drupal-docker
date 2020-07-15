@@ -245,6 +245,11 @@ RUN Var2='\$dotabases = []'
 #WORKING AJUA
 RUN sed -i s/\\\$databases\ \=\ \\\[]\/\\\$databases["'default'"]["'default'"]\ \=\ \["'database'"\ \=\>\ "'mydb'","'username'"\ \=\>\ "'admin'","'password'"\ \=\>\ "'admin'","'host'"\ \=\>\ "'db'","'port'"\ \=\>\ "'3306'","'driver'"\ \=\>\ "'mysql'","'prefix'"\ \=\>\ "'dp_'","'collation'"\ \=\>\ "'utf8mb4_general_ci'",\]/g /var/www/html/sites/default/settings.php
 
+
+#$databases['default']['default'] = array('driver' => 'mysql','database' => 'databasename','username' => 'username','password' => 'password','host' => 'localhost','prefix' => '',);
+#$databases = array ('default' => array ('default' => array ('database' => 'drupal', 'username' => 'root', 'password' => '', 'host' => 'localhost', 'port' => '', 'driver' => 'mysql', 'prefix' => '',),),);
+
+
 #  nano /var/www/html/sites/default/settings.php
 
 #RUN sed -i s/\\\$databases\ \=\ \\\[]\/\\\$databases['default']['default']\/g /var/www/html/sites/default/settings.php
