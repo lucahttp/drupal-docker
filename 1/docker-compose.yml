@@ -1,0 +1,46 @@
+version: '3.1'
+
+services:
+  db:
+    # container_name: database_mysql
+    restart: always
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: superpass
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      # - my-datavolume:/var/lib/mysql  
+      - './.data/mysql:/var/lib/mysql'
+    ports:
+      - "3306:3306"
+  web:
+    depends_on:
+      - db
+    links:
+      - db
+    build:
+      context: ./
+      dockerfile: drupal.dockerfile
+      args:
+        db_host: db
+        db_port: 3306
+        db_name: mydb
+        db_user: admin
+        db_pass: admin
+    ports:
+      - "80:80"
+      - "443:443"
+    #volumes:
+      # - './path/on/docker/host:/path/inside/container'  
+      # - './.data/wordpress:/var/www/html'
+      # - .:/code
+    #environment:
+    #  DB_HOST_ENV: 127.0.0.1
+    #  DB_NAME_ENV: db
+    #  DB_USER_ENV: admin
+    #  DB_PASS_ENV:
+  # redis:
+  #   image: "redis:alpine"
+  # docker-compose up --force-recreate --renew-anon-volumes --build
